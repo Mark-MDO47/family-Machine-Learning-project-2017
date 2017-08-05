@@ -16,7 +16,7 @@ Some great resources:
 
 ### "Python Machine Learning" by S. Raschke
 
-### "Deep Learning" by Goodfellow, Bengio, and Courville
+### "Deep Learning" by I. Goodfellow, Y. Bengio, and A. Courville
 
 ### Wikipedia.org
 
