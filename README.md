@@ -18,6 +18,8 @@ Some great resources:
 
 ### "Deep Learning" by I. Goodfellow, Y. Bengio, and A. Courville
 
+### Anaconda - https://www.continuum.io/
+
 ### Wikipedia.org
 
 ### The inimitable www.google.com
