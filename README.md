@@ -23,3 +23,8 @@ Some great resources:
 ### Wikipedia.org
 
 ### The inimitable www.google.com
+
+The Jupyter Notebooks as html files:
+
+http://htmlpreview.github.io/?https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Regression/MarkLinearRegression.html
+
