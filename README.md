@@ -26,5 +26,5 @@ Some great resources:
 
 The Jupyter Notebooks as html files:
 
-http://htmlpreview.github.io/?https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Regression/MarkLinearRegression.html
+<a href="http://htmlpreview.github.io/?https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Regression/MarkLinearRegression.html">Mark's Regression Tutorial</a>
 
