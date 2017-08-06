@@ -26,7 +26,7 @@ Some great resources:
 
 The Jupyter Notebooks as html files:
 
-<B>NOTE: these look MUCH better if you copy them to your disk and display in your web browser, especially the math formatting.
+<B>NOTE: these HTML versions look MUCH better if you copy them to your disk and display in your web browser, especially the math formatting.
 The plots look OK this way.<B>
 
 <a href="http://htmlpreview.github.io/?https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Regression/MarkLinearRegression.html">Mark's Regression Tutorial</a>
