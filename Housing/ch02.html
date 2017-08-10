@@ -11778,45 +11778,109 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="LET'S-START-ON-THE-FIRST-PROBLEM-&#8211;-HOUSING-PRICES-AND-SCIKIT-LEARN">LET'S START ON THE FIRST PROBLEM &#8211; HOUSING PRICES AND SCIKIT-LEARN<a class="anchor-link" href="#LET'S-START-ON-THE-FIRST-PROBLEM-&#8211;-HOUSING-PRICES-AND-SCIKIT-LEARN">&#182;</a></h3><p>We will put together an algorithm to predict housing prices in California.</p>
-<p>This exercise is mostly taken from Chapter Two of the book “Hands-On Machine Learning with SciKit-Learn and TensorFlow" by Aurelien Geron. An AWESOME chapter to a fabulous book!!! I hope he doesn't mind if I take my kids through this part of it...</p>
+<h1 id="LET'S-START-ON-THE-FIRST-PROBLEM-&#8211;-HOUSING-PRICES-AND-SCIKIT-LEARN">LET'S START ON THE FIRST PROBLEM &#8211; HOUSING PRICES AND SCIKIT-LEARN<a class="anchor-link" href="#LET'S-START-ON-THE-FIRST-PROBLEM-&#8211;-HOUSING-PRICES-AND-SCIKIT-LEARN">&#182;</a></h1><p>We will put together an algorithm to predict housing prices in California.</p>
+<h5 id="Attribution">Attribution<a class="anchor-link" href="#Attribution">&#182;</a></h5><p>This exercise is mostly taken from Chapter Two of the book “Hands-On Machine Learning with SciKit-Learn and TensorFlow" by Aurelien Geron. An AWESOME chapter to a fabulous book!!! I hope he doesn't mind if I take my kids through this part of it...</p>
 <p>Aurelien Geron's Chapter Two does a much more thorough walk-through. That one chapter was worth the price of the book!</p>
-<p>As in chapter two of the book, we will go through a lot of the steps that would be done for a true Machine Learning task: getting the data, data exploration, deciding what to do about data issues, making a data pipeline so it is easy to get newer data, splitting the data into training and validating data sets, selecting an algorithm, exploring the hyperparameter settings and trying to make the algorithm perform as well as possible on the training data set, and validating the model on the validating data set.</p>
-<p>While doing this we will learn more about Python and several important libraries, especially pandas and scikit-learn.</p>
-<p>My purpose is to give the kids an introduction to (1) the many steps and pitfalls involved in getting, initially exploring, and preparing the data and (2) lead them from simple regression which they have some knowledge of to multivariate regression and introduce partial derivatives along the way. Not sure how much of the actual modeling we will do after that diversion.</p>
-<p>(2) One reason I want to explore regression is because we had previously looked at Google Causal Impact and with all the moving parts there we didn't completely cover regression. They need to get from approx. first year college calculus to the point where they can at least intuitively understand partial derivatives and backpropogation.</p>
+<h5 id="Why-are-we-doing-this?">Why are we doing this?<a class="anchor-link" href="#Why-are-we-doing-this?">&#182;</a></h5><p>As in chapter two of the book, we will go through a lot of the steps that would be done for a true Machine Learning task: getting the data, data exploration, deciding what to do about data issues, making a data pipeline so it is easy to get newer data, splitting the data into training and validating data sets, selecting an algorithm, exploring the hyperparameter settings and trying to make the algorithm perform as well as possible on the training data set, and validating the model on the validating data set.</p>
+<p>While doing this we will learn more about Python and several important libraries, especially pandas and scikit-learn. Most of our time is spent on data exploration and libraries/routines to help with that, but we also touch on regression and decision trees. We do a bit of a digression into a deep dive on regression and the tools for iteratively optimizing.</p>
+<p>My purpose is to give the kids an introduction to (1) the many steps and pitfalls involved in getting, initially exploring, and preparing the data and (2) lead them from simple regression which they have some knowledge of to multivariate regression and introduce partial derivatives along the way.</p>
+<p>One reason I want to explore regression is because we had previously looked at Google Causal Impact and with all the moving parts there we didn't completely cover regression. They need to get from approx. first year college calculus to the point where they can at least intuitively understand partial derivatives and backpropogation.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[145]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Snarky-Table-of-Contents">Snarky Table of Contents<a class="anchor-link" href="#Snarky-Table-of-Contents">&#182;</a></h2><p><a href="#Download-the-Data-Set-and-use-libraries-OS,-TARFILE,-URLLIB">Download the Data Set and use libraries OS, TARFILE, URLLIB</a></p>
+<p><a href="#PANDAS-library---not-just-another-spotted-bear!">PANDAS library - not just another spotted bear!</a></p>
+<ul>
+<li><a href="#Pandas-methods-HEAD-and-TAIL">Pandas methods HEAD and TAIL</a></li>
+<li><a href="#Pandas-method-INFO">Pandas method INFO</a></li>
+<li><a href="#Pandas-method-VALUE_COUNTS">Pandas method VALUE_COUNTS</a></li>
+</ul>
+<p><a href="#MATPLOTLIB---is-it-an-evil-plot?">MATPLOTLIB - is it an evil plot?</a></p>
+<p><a href="#Data-Sanitation---Keeping-Training-away-from-Validation">Data Sanitation - Keeping Training away from Validation</a></p>
+<ul>
+<li><p><a href="#Well,-that-almost-worked...-let&#39;s-make-a-hash-of-it!">Well, that almost worked... let's make a hash of it!</a></p>
+</li>
+<li><p><a href="#Reinventing-the-wheel">Reinventing the wheel</a></p>
+</li>
+</ul>
+<p><a href="#That&#39;s-enough-ad-hoc-fooling-around---SciKit-Learn">That's enough ad-hoc fooling around - SciKit-Learn</a></p>
+<ul>
+<li><a href="#When-good-data-goes-bad---get-the-lumps-out">When good data goes bad - get the lumps out</a></li>
+<li><a href="#StratifiedShuffleSplit---smooth-with-no-lumps!">StratifiedShuffleSplit - smooth with no lumps!</a></li>
+<li><a href="#Let&#39;s-get-organized-up-there!">Let's get organized up there!</a></li>
+</ul>
+<p><a href="#More-evil-plots---scatter-plot!">More evil plots - scatter plot!</a></p>
+<p><a href="#Why-should-we-work?-That-is-what-computers-are-for!">Why should we work? That is what computers are for!</a></p>
+<ul>
+<li><a href="#Let&#39;s-visualize-that---is-it-correlated?">Let's visualize that - is it correlated?</a></li>
+<li><a href="#I-am-ready-for-my-close-up!">I am ready for my close-up!</a></li>
+<li><a href="#New-data-from-old!">New data from old!</a></li>
+</ul>
+<p><a href="#Surf-the-data-pipeline---better-than-artisan-hand-crafted-data!">Surf the data pipeline - better than artisan hand-crafted data!</a></p>
+<ul>
+<li><a href="#Scaling---almost-always-necessary">Scaling - almost always necessary</a></li>
+<li><a href="#Add-the-new-data-columns">Add the new data columns</a></li>
+</ul>
+<p><a href="#After-all-that---three-lines-of-code???">After all that - three lines of code???</a></p>
+<ul>
+<li><a href="#This-is-an-example-of-underfitting">This is an example of underfitting</a></li>
+<li><a href="#Overfitting---with-more-power-comes-more-responsibility">Overfitting - with more power comes more responsibility</a></li>
+<li><a href="#As-Aurelien-Geron-says-in-his-book---WAIT,-WHAT!?-No-error-at-all?">As Aurelien Geron says in his book - WAIT, WHAT!? No error at all?</a></li>
+<li><a href="#If-at-first-you-don&#39;t-succeed---Random-Forest">If at first you don't succeed - Random Forest</a></li>
+</ul>
+<p><a href="#Goodbye-to-the-100-acre-wood">Goodbye to the 100-acre wood</a></p>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Library-Table-of-Contents">Library Table of Contents<a class="anchor-link" href="#Library-Table-of-Contents">&#182;</a></h2><p><a href="#Download-the-Data-Set-and-use-libraries-OS,-TARFILE,-URLLIB">OS, TARFILE, URLLIB</a></p>
+<p><a href="#PANDAS-library---not-just-another-spotted-bear!">PANDAS</a></p>
+<ul>
+<li><a href="#Pandas-methods-HEAD-and-TAIL">HEAD and TAIL</a></li>
+<li><a href="#Pandas-method-INFO">INFO</a></li>
+<li><a href="#Pandas-method-VALUE_COUNTS">VALUE_COUNTS</a></li>
+</ul>
+<p><a href="#MATPLOTLIB---is-it-an-evil-plot?">MATPLOTLIB</a></p>
+<ul>
+<li><a href="#MATPLOTLIB---is-it-an-evil-plot?">HIST</a></li>
+<li><a href="#More-evil-plots---scatter-plot!">PLOT(TYPE=SCATTER)</a></li>
+<li><a href="#Let&#39;s-visualize-that---is-it-correlated?">SCATTER_MATRIX</a></li>
+</ul>
+<p><a href="#That&#39;s-enough-ad-hoc-fooling-around---SciKit-Learn">SCIKIT-LEARN</a></p>
+<ul>
+<li><a href="#StratifiedShuffleSplit---smooth-with-no-lumps!">STRATIFIEDSHUFFLESPLIT</a></li>
+<li><a href="#Reinventing-the-wheel">TRAIN_TEST_SPLIT</a></li>
+<li><a href="#As-Aurelien-Geron-says-in-his-book---WAIT,-WHAT!?-No-error-at-all?">CROSS_VAL_SCORE</a></li>
+<li><a href="#Scaling---almost-always-necessary">IMPUTER, LABELBINARIZER</a></li>
+<li><a href="#Add-the-new-data-columns">PIPELINE, STANDARDSCALER, BASEESTIMATOR, TRANSFORMERMIXIN, FEATUREUNION</a></li>
+<li><a href="#Well-it-works---didn&#39;t-crash---but-the-values-are-not-very-accurate">MEAN_SQUARED_ERROR</a></li>
+<li><a href="#After-all-that---three-lines-of-code???">LINEARREGRESSION</a></li>
+<li><a href="#Overfitting---with-more-power-comes-more-responsibility">DECISIONTREEREGRESSOR</a></li>
+<li><a href="#If-at-first-you-don&#39;t-succeed---Random-Forest">RANDOMFORESTREGRESSOR</a></li>
+</ul>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Hello World!
-</pre>
 </div>
 </div>
-
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Download-the-Data-Set-and-use-libraries-OS,-TARFILE,-URLLIB">Download the Data Set and use libraries OS, TARFILE, URLLIB<a class="anchor-link" href="#Download-the-Data-Set-and-use-libraries-OS,-TARFILE,-URLLIB">&#182;</a></h3>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -11911,14 +11975,44 @@ file D:\Olson_Summer2017_PythonMachineLearing_bare\Housing\datasets\housing\hous
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Another-great-library---pandas">Another great library - pandas<a class="anchor-link" href="#Another-great-library---pandas">&#182;</a></h5><p>This allows reading of spreadsheets including Comma Separated Variable files (CSV files) - and lots more formats including Excel *.xlsx.</p>
+<h3 id="PANDAS-library---not-just-another-spotted-bear!">PANDAS library - not just another spotted bear!<a class="anchor-link" href="#PANDAS-library---not-just-another-spotted-bear!">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Another-great-library---pandas---and-Object-Oriented-Programming">Another great library - pandas - and Object Oriented Programming<a class="anchor-link" href="#Another-great-library---pandas---and-Object-Oriented-Programming">&#182;</a></h5><p>This allows reading of spreadsheets including Comma Separated Variable files (CSV files) - and lots more formats including Excel *.xlsx.</p>
 <p>Once we read the *.csv file into the pandas "dataframe" object "housing" with the routine we wrote, we can look at the first few rows with the dataframe "head" method.</p>
 <p>This technique is known as object-oriented programming: housing is an "instance" the object of type dataframe defined in the pandas library. This "dataframe" instance contains and/or points to both data and "methods" (functions) to operate on the data. We load (initialize) the pandas dataframe object instance "housing" with our csv data and then call the head method to see the first few rows.</p>
 <p>Object-oriented programming can become a complex subject in itself (as you can see by the terminology above), but mostly we will just use objects from libraries and not get into the intricacies of making our own objects.</p>
-<p>"head" and "tail" are inspired by commonly used Linux/Unix programs of that name that do about the same type of thing with any text file.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Pandas-methods-HEAD-and-TAIL">Pandas methods HEAD and TAIL<a class="anchor-link" href="#Pandas-methods-HEAD-and-TAIL">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;head&quot;</span> <span class="ow">and</span> <span class="s2">&quot;tail&quot;</span> <span class="n">are</span> <span class="n">inspired</span> <span class="n">by</span> <span class="n">commonly</span> <span class="n">used</span> <span class="n">Linux</span><span class="o">/</span><span class="n">Unix</span> <span class="n">programs</span> <span class="n">of</span> <span class="n">that</span> <span class="n">name</span> <span class="n">that</span> <span class="n">do</span> <span class="n">about</span> <span class="n">the</span> <span class="n">same</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">thing</span> <span class="k">with</span> <span class="nb">any</span> <span class="n">text</span> <span class="n">file</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -12059,6 +12153,15 @@ file D:\Olson_Summer2017_PythonMachineLearing_bare\Housing\datasets\housing\hous
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Pandas-method-INFO">Pandas method INFO<a class="anchor-link" href="#Pandas-method-INFO">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Another-great-pandas-method-is-info()">Another great pandas method is info()<a class="anchor-link" href="#Another-great-pandas-method-is-info()">&#182;</a></h5><p>It gives information about each of the columns as seen below.</p>
 <p>As pointed out in Geron's great book, notice that the number of entries for total_bedrooms is not the same as the other columns. This means there are some rows with missing entries for total_bedrooms.</p>
 <p>What should we do about this? Our machine learning algorithm only understands numbers; it cannot process a missing value.</p>
@@ -12112,6 +12215,15 @@ memory usage: 1.6+ MB
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Pandas-method-VALUE_COUNTS">Pandas method VALUE_COUNTS<a class="anchor-link" href="#Pandas-method-VALUE_COUNTS">&#182;</a></h5>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -12329,6 +12441,15 @@ Name: ocean_proximity, dtype: int64</pre>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="MATPLOTLIB---is-it-an-evil-plot?">MATPLOTLIB - is it an evil plot?<a class="anchor-link" href="#MATPLOTLIB---is-it-an-evil-plot?">&#182;</a></h3>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -13128,7 +13249,16 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="best-practices-for-training-and-validation-data">best practices for training and validation data<a class="anchor-link" href="#best-practices-for-training-and-validation-data">&#182;</a></h5><p>If the algorithm is trained on all the data, it can adjust to the particular data in ways that do not generalize to all data.</p>
+<h3 id="Data-Sanitation---Keeping-Training-away-from-Validation">Data Sanitation - Keeping Training away from Validation<a class="anchor-link" href="#Data-Sanitation---Keeping-Training-away-from-Validation">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Best-Practices-for-training-and-validation-data">Best Practices for training and validation data<a class="anchor-link" href="#Best-Practices-for-training-and-validation-data">&#182;</a></h5><p>If the algorithm is trained on all the data, it can adjust to the particular data in ways that do not generalize to all data.</p>
 <p>For instance, if we trained on 10 coin-flip data samples which had 7 heads and 3 tails, then compared our model prediction performance on that same data, it would look good. However, when we went to Las Vegas and entered the famous coin-flipping tournaments we would be surprised to see that it performed less well on real-world data.</p>
 <p>That flip (ha ha!) example only shows the tip of the iceberg. A more serious issue is that the model might "overfit" the training data by finding things in the training data that correlate well in the training data but are actually just coincidence. For instance if a model is trained to identify goats and sees many pictures of goats on grass plus other pictures of things like cars on roads or people in houses, the model may notice that if the bottom of the picture is green then it is likely to be a goat. That is true in the training data set but it is not a characteristic of goats. If the model uses that type of information, that is called overfitting and the model will give surprising results when used on real-world data, like goats on the "Let's Make a Deal" show with Monty Hall.</p>
 <p>Another issue to consider is whether the model has enough samples to represent all the important cases. We already discussed the problem of a medical training data set that did not include samples of appendicitis.</p>
@@ -13147,7 +13277,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 <h5 id="OK---let's-back-up-from-that-rabbit-hole...">OK - let's back up from that rabbit hole...<a class="anchor-link" href="#OK---let's-back-up-from-that-rabbit-hole...">&#182;</a></h5><p>There are many steps in the process that will attempt to deal with these issues. The first step is to divide the data into two pieces: the "training" data and the "validation" or "test" data.</p>
 <p>The idea is the model is trained on the "training" part of the data, then tested on the "validation" part of the data to get a sense for whether the model has found features that generalize to data that it has not seen before (example: not just looking for grass in the picture).</p>
 <h5 id="One-thing-that-is-critical---once-you-split-the-data,-keep-it-split-the-same-way-and-never-train-on-the-validation-data!">One thing that is critical - once you split the data, keep it split the same way and never train on the validation data!<a class="anchor-link" href="#One-thing-that-is-critical---once-you-split-the-data,-keep-it-split-the-same-way-and-never-train-on-the-validation-data!">&#182;</a></h5><p>You will find that the trained model always gets a better score on the training data (that it has seen before) than it does on other data - either the validation data or real world data.</p>
-<p>If you allow your model to train on the validation data and then test it on the validation data, you will bu unhappily surprised when it runs into real world data.</p>
+<p>If you allow your model to train on the validation data and then test it on the validation data, you will but unhappily surprised when it runs into real world data.</p>
 <p>One way that this can happen is that the split is usually done by a program using random numbers. If you do that split one day and train, then come back the next day and split it again and train some more, unless you are careful the split could be different the 2nd time and some validation and training data will leak into each other. To avoid this you could "seed" the random number generator and always seed it the same way.</p>
 <p>That prohibition applies all the way through training and evaluating your models. Once you have validated your model, it makes sense to train it also on the validation data before it hits the real world.</p>
 
@@ -13211,12 +13341,25 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##### Well, that almost worked... let&#39;s make a hash of it!</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="well,-that-almost-works...">well, that almost works...<a class="anchor-link" href="#well,-that-almost-works...">&#182;</a></h5><p>Oops - we previously made a function that can update the data. Even seeding the random number generator will not split it properly if someone adds data to the data set.</p>
+<p>Oops - we previously made a function that can update the data. Even seeding the random number generator will not split it properly if someone adds data to the data set.</p>
 <p>Well, we can solve that! Use a cryptographic "hash" function on the row index and use that to split the data. Still random, and if someone adds samples at the end it still splits the earlier samples the same.</p>
 <p>Even this will not work if a row is deleted or if data is added at the start or if the data gets re-ordered or...</p>
 
@@ -13243,6 +13386,15 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Reinventing-the-wheel">Reinventing the wheel<a class="anchor-link" href="#Reinventing-the-wheel">&#182;</a></h5>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -13299,6 +13451,15 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="That's-enough-ad-hoc-fooling-around---SciKit-Learn">That's enough ad-hoc fooling around - SciKit-Learn<a class="anchor-link" href="#That's-enough-ad-hoc-fooling-around---SciKit-Learn">&#182;</a></h3>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -13440,6 +13601,19 @@ JKljhoAkdcwQkKSOGQKS1DFDQJI6ZghIUscMAUnq2P8Df44AwSYvoGsAAAAASUVORK5CYII=
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##### When good data goes bad - get the lumps out</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
@@ -13603,6 +13777,15 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="StratifiedShuffleSplit---smooth-with-no-lumps!">StratifiedShuffleSplit - smooth with no lumps!<a class="anchor-link" href="#StratifiedShuffleSplit---smooth-with-no-lumps!">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Now-we-have-a-somewhat-flat-income-distribution---make-the-split-keep-it!">Now we have a somewhat flat income distribution - make the split keep it!<a class="anchor-link" href="#Now-we-have-a-somewhat-flat-income-distribution---make-the-split-keep-it!">&#182;</a></h5><p>When we split the housing data we want the split to be about equal (percentage wise) with respect to income_cat to avoid sampling bias on a term that is important in our model.</p>
 <p>Note that we have just decided ahead of time that we think median income is important for predicting house prices.</p>
 <p>It is possible with some model algorithms to just give it all your raw data and have it figure out what is important and how to scale it etc., but a mistake we make before or during the time we split the data into train/validate can make the algorithm blind to that property. For instance, if a random split puts all of the very few high-income samples into the validation data, it will be like the medical data set with no examples of appendicitis.</p>
@@ -13615,7 +13798,7 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[160]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">StratifiedShuffleSplit</span>
@@ -13630,10 +13813,35 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-1-063085796809&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+<span class="ansi-green-fg">      2</span> 
+<span class="ansi-green-fg">      3</span> split <span class="ansi-yellow-intense-fg ansi-bold">=</span> StratifiedShuffleSplit<span class="ansi-yellow-intense-fg ansi-bold">(</span>n_splits<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> test_size<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">0.2</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> random_state<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">47</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 4</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">for</span> train_index<span class="ansi-yellow-intense-fg ansi-bold">,</span> test_index <span class="ansi-green-intense-fg ansi-bold">in</span> split<span class="ansi-yellow-intense-fg ansi-bold">.</span>split<span class="ansi-yellow-intense-fg ansi-bold">(</span>housing<span class="ansi-yellow-intense-fg ansi-bold">,</span> housing<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-blue-intense-fg ansi-bold">&#34;income_cat&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">      5</span>     strat_train_set <span class="ansi-yellow-intense-fg ansi-bold">=</span> housing<span class="ansi-yellow-intense-fg ansi-bold">.</span>loc<span class="ansi-yellow-intense-fg ansi-bold">[</span>train_index<span class="ansi-yellow-intense-fg ansi-bold">]</span>
+<span class="ansi-green-fg">      6</span>     strat_test_set <span class="ansi-yellow-intense-fg ansi-bold">=</span> housing<span class="ansi-yellow-intense-fg ansi-bold">.</span>loc<span class="ansi-yellow-intense-fg ansi-bold">[</span>test_index<span class="ansi-yellow-intense-fg ansi-bold">]</span>
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;housing&#39; is not defined</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[161]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;income_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">housing</span><span class="p">)</span>
@@ -13648,24 +13856,31 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[161]:</div>
+<div class="prompt"></div>
 
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-2-57fbbc8f0a17&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>housing<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-blue-intense-fg ansi-bold">&#34;income_cat&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>value_counts<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-yellow-intense-fg ansi-bold">/</span> len<span class="ansi-yellow-intense-fg ansi-bold">(</span>housing<span class="ansi-yellow-intense-fg ansi-bold">)</span>
 
-
-<div class="output_text output_subarea output_execute_result">
-<pre>3.0    0.350581
-2.0    0.318847
-4.0    0.176308
-5.0    0.114438
-1.0    0.039826
-Name: income_cat, dtype: float64</pre>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;housing&#39; is not defined</pre>
 </div>
-
 </div>
 
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Let's-get-organized-up-there!">Let's get organized up there!<a class="anchor-link" href="#Let's-get-organized-up-there!">&#182;</a></h5>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -13715,6 +13930,15 @@ Name: income_cat, dtype: float64</pre>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="More-evil-plots---scatter-plot!">More evil plots - scatter plot!<a class="anchor-link" href="#More-evil-plots---scatter-plot!">&#182;</a></h3>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -16298,6 +16522,15 @@ IwpvIiIiIsuIwpuIiIjIMqLwJiIiIrKMKLyJiIiILCP/BznBoJ59eavEAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Why-should-we-work?-That-is-what-computers-are-for!">Why should we work? That is what computers are for!<a class="anchor-link" href="#Why-should-we-work?-That-is-what-computers-are-for!">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Let's-let-the-computer-tell-us-what-the-correlations-are">Let's let the computer tell us what the correlations are<a class="anchor-link" href="#Let's-let-the-computer-tell-us-what-the-correlations-are">&#182;</a></h5><p>We have been using some intuition and background knowledge to try to determine which factors would be important; let's let the computer do a linear correlation study and see what the data suggests.</p>
 <p>We list linear correlation with respect to median house value, which we feel is highly correlated with what a particular house value would be.</p>
 <p>The larger the magnitude or absolute value of the linear correlation, the more highly linear correlated the column.</p>
@@ -16355,7 +16588,16 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Let's-visualize-that">Let's visualize that<a class="anchor-link" href="#Let's-visualize-that">&#182;</a></h5><p>The now-deprecated scatter_matrix routine shows the column-to-column scatter plots of our correlation matrix.</p>
+<h5 id="Let's-visualize-that---is-it-correlated?">Let's visualize that - is it correlated?<a class="anchor-link" href="#Let's-visualize-that---is-it-correlated?">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The now-deprecated scatter_matrix routine shows the column-to-column scatter plots of our correlation matrix.</p>
 <p>As we know, median_house_value versus median_house_value (or any other column versus itself) would give just a straight line. Since that plot would have no information, the plots in the falling diagonal are replaced by histograms.</p>
 
 </div>
@@ -20435,6 +20677,15 @@ FovFYqkiViG3WCwWi8VisViqiFXILRaLxWKxWCyWKvL/A6hpgxFW3H4eAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="I-am-ready-for-my-close-up!">I am ready for my close-up!<a class="anchor-link" href="#I-am-ready-for-my-close-up!">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="Let's-look-at-median_income-vs-median_house_value-in-close-up">Let's look at median_income vs median_house_value in close-up<a class="anchor-link" href="#Let's-look-at-median_income-vs-median_house_value-in-close-up">&#182;</a></h5><p>We will do that with a couple of different alpha (transparency) values and in both orientations.</p>
 <p>Note the line that appears at housing value $500,000. Also there are less prominent lines at about $450K, $350K, $275K, and maybe a couple of other values.</p>
 <p>The $500K line is because the data is topped out there: if a house has a value of $600K it was just enterred at $500K since that was the highest value they wanted in their database. Don't ask me why.</p>
@@ -22437,7 +22688,16 @@ kSJFihSkxiBFihQpUpAagxQpUqRIAfz/AuzfWQPEGyUAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Linear-Correlation-isn't-everything!-We-need-more!">Linear Correlation isn't everything! We need more!<a class="anchor-link" href="#Linear-Correlation-isn't-everything!-We-need-more!">&#182;</a></h5><p>Intuitively we feel that the number of bedrooms per house should correlate with the price.</p>
+<h3 id="New-data-from-old!">New data from old!<a class="anchor-link" href="#New-data-from-old!">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Linear-Correlation-isn't-everything!-We-need-more-power!">Linear Correlation isn't everything! We need more power!<a class="anchor-link" href="#Linear-Correlation-isn't-everything!-We-need-more-power!">&#182;</a></h5><p>Intuitively we feel that the number of bedrooms per house should correlate with the price.</p>
 <p>There are columns dealing with the bedrooms in the region and the total number of rooms in the region and the total number of households in the region. But those do not have a high linear correlation with median_house_value.</p>
 <p>We can create some artificial columns that are non-linear combinations of other columns and see if we can get a few more columns with higher correlation.</p>
 <p>We see that bedrooms_per_room and rooms_per_household correlate well. The population_per_household is not so promising.</p>
@@ -22497,6 +22757,15 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Surf-the-data-pipeline---better-than-artisan-hand-crafted-data!">Surf the data pipeline - better than artisan hand-crafted data!<a class="anchor-link" href="#Surf-the-data-pipeline---better-than-artisan-hand-crafted-data!">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="OK-that-was-experimenting;-now-let's-do-it-for-real.">OK that was experimenting; now let's do it for real.<a class="anchor-link" href="#OK-that-was-experimenting;-now-let's-do-it-for-real.">&#182;</a></h5><p>We keep talking about a data pipeline; now let's make one.</p>
 <p>I am going to rush forward through this part. Aurelien Geron's Chapter Two does much more discussion of the right way to do this, using SciKit-Learn routines when they are available and making your special code for your data issues fit into the SciKit-Learn mold to make it all easy to maintain.</p>
 <p>For our purposes, we just want to get the data cleaned up so we can move to the next part.</p>
@@ -22506,6 +22775,15 @@ Name: median_house_value, dtype: float64</pre>
 <li>Use LabelBinarizer() to do one-hot transform on text field ocean_proximity</li>
 </ul>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Scaling---almost-always-necessary">Scaling - almost always necessary<a class="anchor-link" href="#Scaling---almost-always-necessary">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -22583,6 +22861,15 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Add-the-new-data-columns">Add the new data columns<a class="anchor-link" href="#Add-the-new-data-columns">&#182;</a></h5>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -22823,6 +23110,15 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="After-all-that---three-lines-of-code???">After all that - three lines of code???<a class="anchor-link" href="#After-all-that---three-lines-of-code???">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="WHEW!-now-we-are-finally-ready-for-the-machine-to-learn-something">WHEW! now we are finally ready for the machine to learn something<a class="anchor-link" href="#WHEW!-now-we-are-finally-ready-for-the-machine-to-learn-something">&#182;</a></h5><p>We sure have to spoon-feed it data. Lots of mistakes can happen in the data preparation if care is not taken.</p>
 <p>Take a look at the "Regression" part of our summer project to see what regression is and how the parameters are calculated.</p>
 
@@ -22907,7 +23203,16 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Well-it-works-(didn't-crash)-but-the-values-are-not-very-accurate">Well it works (didn't crash) but the values are not very accurate<a class="anchor-link" href="#Well-it-works-(didn't-crash)-but-the-values-are-not-very-accurate">&#182;</a></h5><p>Let's get a Mean Square Error estimate over the whole training set</p>
+<h5 id="Well-it-works---didn't-crash---but-the-values-are-not-very-accurate">Well it works - didn't crash - but the values are not very accurate<a class="anchor-link" href="#Well-it-works---didn't-crash---but-the-values-are-not-very-accurate">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's get a Mean Square Error estimate over the whole training set</p>
 
 </div>
 </div>
@@ -22953,8 +23258,35 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="This-is-an-example-of-underfitting">This is an example of underfitting<a class="anchor-link" href="#This-is-an-example-of-underfitting">&#182;</a></h5><p>For most districts, median housing values go from about \$120K to \$265K so if our model typically predicts something that is off by \$68K that is not very helpful.</p>
+<h5 id="This-is-an-example-of-underfitting">This is an example of underfitting<a class="anchor-link" href="#This-is-an-example-of-underfitting">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For most districts, median housing values go from about \$120K to \$265K so if our model typically predicts something that is off by \$68K that is not very helpful.</p>
 <p>When a model underfits the data, it usually means that the features in the data don't have enough predictive value to enable a better fit. It can also mean that the model we chose is not powerful enough to use that data succesfully.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Overfitting---with-more-power-comes-more-responsibility">Overfitting - with more power comes more responsibility<a class="anchor-link" href="#Overfitting---with-more-power-comes-more-responsibility">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's try a more powerful model - the SciKit-Learn implementation of DecisionTreeRegressor().</p>
 
 </div>
@@ -23003,7 +23335,16 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="As-Aurelien-Geron-says-in-his-book---WAIT,-WHAT!?-No-error-at-all?">As Aurelien Geron says in his book - WAIT, WHAT!? No error at all?<a class="anchor-link" href="#As-Aurelien-Geron-says-in-his-book---WAIT,-WHAT!?-No-error-at-all?">&#182;</a></h5><p>Probably the Decision Tree overfit the data because the Decision Tree model was too powerful (in this case, split the data into too deep of a many-nested tree).</p>
+<h5 id="As-Aurelien-Geron-says-in-his-book---WAIT,-WHAT!?-No-error-at-all?">As Aurelien Geron says in his book - WAIT, WHAT!? No error at all?<a class="anchor-link" href="#As-Aurelien-Geron-says-in-his-book---WAIT,-WHAT!?-No-error-at-all?">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Probably the Decision Tree overfit the data because the Decision Tree model was too powerful (in this case, split the data into too deep of a many-nested tree).</p>
 <p>How do we tell if it did overfit? We are not yet ready to introduce the models to the validation data.</p>
 <p>We can have the model trained and evaluated over various K-fold splits of the training data to do cross validation. This is a powerful technique!</p>
 <p>When we do this, we see that the DecisionTreeRegressor model works slightly less well than the LinearRegression model. This confirms that the DecisionTreeRegressor is triggering on data items that don't generalize well - the classic characteristic of overfitting.</p>
@@ -23070,6 +23411,15 @@ lin_reg Standard deviation: 1394.38608567
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="If-at-first-you-don't-succeed---Random-Forest">If at first you don't succeed - Random Forest<a class="anchor-link" href="#If-at-first-you-don't-succeed---Random-Forest">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="One-more-model-type---Random-Forest-Regressor">One more model type - Random Forest Regressor<a class="anchor-link" href="#One-more-model-type---Random-Forest-Regressor">&#182;</a></h5><p>This model trains on random subsets of features then "averages" the predictions. The technique of building a model out of many other models is called Ensemble Learning, and it can be very useful.</p>
 <p>We see that its prediction in the training set gives a raw RMSE of about \$22K, somewhere between the \$63K of the linear regression model and the disturbing \$0K of the Decision Tree. This is certainly the most comfortable of the three models we have tried from a raw RMSE of the training data perspective.</p>
 <p>However, performing the same K-fold cross validation scoring as with the other models we see that it does not seem to be significantly more generalizable than the other models.</p>
@@ -23128,24 +23478,20 @@ RandomForestRegressor Standard deviation: 1394.38608567
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Goodbye-to-the-100-acre-wood">Goodbye to the 100-acre wood<a class="anchor-link" href="#Goodbye-to-the-100-acre-wood">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h5 id="This-is-where-we-part-company-with-Aurelien-Geron's-Chapter-two-of--&#8220;Hands-On-Machine-Learning-with-SciKit-Learn-and-TensorFlow&quot;">This is where we part company with Aurelien Geron's Chapter two of  &#8220;Hands-On Machine Learning with SciKit-Learn and TensorFlow"<a class="anchor-link" href="#This-is-where-we-part-company-with-Aurelien-Geron's-Chapter-two-of--&#8220;Hands-On-Machine-Learning-with-SciKit-Learn-and-TensorFlow&quot;">&#182;</a></h5><p>Bidding a fond adieu (or a fondue - ha!) to this great book! Chapter two continues on with hyperparameter tuning of the models and even more in the exercises...</p>
 <p>And now for something completely different - neural networks and the stock market!</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
     </div>
   </div>
