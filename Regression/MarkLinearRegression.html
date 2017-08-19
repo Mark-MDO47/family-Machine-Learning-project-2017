@@ -11854,7 +11854,7 @@ and calculates a prediction (think $\hat y$ - the hat means estimate) with the f
 <p>y = aX + b + noise</p>
 <p>Note that the true underlying model uses "a" and "b" since those are the TRUE values, while the prediction uses "$\hat a$" and "$\hat b$" since those are ESTIMATES of the true values.</p>
 <p>Usually a and b are written as ${\theta}_1$ and ${\theta}_0$ respectively and the equation is re-ordered:</p>
-<p>$\hat y$ = ${\theta}_0$ + ${\theta}_1$X</p>
+<p>$\hat y$ = $\hat {\theta}_0$ + $\hat {\theta}_1$X</p>
 <p>y = ${\theta}_0$ + ${\theta}_1$X + noise</p>
 <p>Why would we do this when the aX + b form is so familiar? Because we will soon see cases of Linear Regression applied to data using higher degrees of X - this technique is called Multinomial Regression. For these types of equations we don't want to run out of "a"s and "b"s. Here is an example of a quadratic form Multinomial Regression model:</p>
 <p>y = ${\theta}_0$ + ${\theta}_1$X + ${\theta}_2$$\mathrm{X}^{2}$ + noise</p>
@@ -12825,7 +12825,7 @@ x_0 & x_1 & x_2 \end{vmatrix}
 <p>And remember that we must do this for all the training data points - for all the ${X}_k$ - and combine the results to make one partial derivative so we can adjust ${\theta}$ - AAARRRGGGHHH!!!</p>
 <h6 id="Saved-by-the-bells!">Saved by the bells!<a class="anchor-link" href="#Saved-by-the-bells!">&#182;</a></h6><p>This is starting to look a little messy. Not impossible, but you can see that anything other than the simple cases will be ... not simple!</p>
 <p>... (and I was getting a little sloppy with the math, so I need to retreat from this)</p>
-<p>Fortunately, we are saved by three bells (not Isabel; sorry).</p>
+<p>Fortunately, we are saved by three bells:</p>
 <h6 id="(1)-Those-clever-Machine-Learning-people-did-that-already">(1) Those clever Machine Learning people did that already<a class="anchor-link" href="#(1)-Those-clever-Machine-Learning-people-did-that-already">&#182;</a></h6><p>Unless you are planning on getting a Ph.D. in Artificial Intelligence, you won't be working out these partial differentials. The libraries we use (SciKit-Learn and TensorFlow) and other libraries have already put in correct code to satisfy almost all cases that are normally used. The hard work is done for you!</p>
 <h6 id="(2)-They-are-cleverer-(...ererer)-than-that!-TensorFlow-will-figure-out-YOUR-partial-differentials">(2) They are cleverer (...ererer) than that! TensorFlow will figure out YOUR partial differentials<a class="anchor-link" href="#(2)-They-are-cleverer-(...ererer)-than-that!-TensorFlow-will-figure-out-YOUR-partial-differentials">&#182;</a></h6><p>As we will see a little bit later, if you want to use non-standard equations you give TensorFlow the information to figure out your equations and the partial derivatives - it does the hard work for you!</p>
 <p>There is a fantastic description of how this works in Appendix D of the book "Hands-On Machine Learning with SciKit-Learn and TensorFlow" by A. Geron. Some really beautiful mathematics!</p>
@@ -13754,9 +13754,10 @@ zMwAJwQzM0s4IZiZGeCEYGZmCScEMzMDnBDMzCzx/wHi+49kh94JVgAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If we give the linear regression ${X}_i$ = ${x}^{i}$ for i = 1, 2 and 3...</p>
 <p>similar to our previous example but in a slightly different form</p>
-<p>${\hat y}$ = ${\theta}_{0}$ + $\sum_{i=1}^{3} {\theta}_{i} {x_i}$ = ${\theta}_{0}$ + ${\theta}_{1} {x_1}$ + ${\theta}_{2} {x_2}$ + ${\theta}_{3} {x_3}$</p>
-<p>We can solve for ${\theta}_{i}$ to minimize the RMSE</p>
+<p>${\hat y}$ = ${\hat \theta}_{0}$ + $\sum_{i=1}^{3} {\hat \theta}_{i} {X_i}$ = ${\hat \theta}_{0}$ + ${\hat \theta}_{1} {X_1}$ + ${\hat \theta}_{2} {X_2}$ + $\hat {\theta}_{3} {X_3}$</p>
+<p>We can solve for ${\hat \theta}_{i}$ to minimize the RMSE</p>
 <p>Multiplying out our example, this is what we are looking for:</p>
+<p>$y$ = ($x$ -1) <em> (2 $x$ - 2) </em> ($x$ - 4) + 4</p>
 <p>$y$ = -4 + 18 ${x}$ - 12 ${x}^{2}$ + 2 ${x}^{3}$ + noise</p>
 
 </div>
