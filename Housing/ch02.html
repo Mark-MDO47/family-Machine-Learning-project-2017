@@ -11854,17 +11854,17 @@ div#notebook {
 <p><a href="#MATPLOTLIB---is-it-an-evil-plot?">MATPLOTLIB</a></p>
 <ul>
 <li><a href="#MATPLOTLIB---is-it-an-evil-plot?">HIST</a></li>
-<li><a href="#More-evil-plots---scatter-plot!">PLOT(TYPE=SCATTER)</a></li>
+<li><a href="#More-evil-plots---scatter-plot!">PLOT(KIND=SCATTER)</a></li>
 <li><a href="#Let&#39;s-visualize-that---is-it-correlated?">SCATTER_MATRIX</a></li>
 </ul>
 <p><a href="#That&#39;s-enough-ad-hoc-fooling-around---SciKit-Learn">SCIKIT-LEARN</a></p>
 <ul>
 <li><a href="#StratifiedShuffleSplit---smooth-with-no-lumps!">STRATIFIEDSHUFFLESPLIT</a></li>
 <li><a href="#Reinventing-the-wheel">TRAIN_TEST_SPLIT</a></li>
-<li><a href="#As-Aurelien-Geron-says-in-his-book---WAIT,-WHAT!?-No-error-at-all?">CROSS_VAL_SCORE</a></li>
 <li><a href="#Scaling---almost-always-necessary">IMPUTER, LABELBINARIZER</a></li>
 <li><a href="#Add-the-new-data-columns">PIPELINE, STANDARDSCALER, BASEESTIMATOR, TRANSFORMERMIXIN, FEATUREUNION</a></li>
 <li><a href="#Well-it-works---didn&#39;t-crash---but-the-values-are-not-very-accurate">MEAN_SQUARED_ERROR</a></li>
+<li><a href="#As-Aurelien-Geron-says-in-his-book---WAIT,-WHAT!?-No-error-at-all?">CROSS_VAL_SCORE</a></li>
 <li><a href="#After-all-that---three-lines-of-code???">LINEARREGRESSION</a></li>
 <li><a href="#Overfitting---with-more-power-comes-more-responsibility">DECISIONTREEREGRESSOR</a></li>
 <li><a href="#If-at-first-you-don&#39;t-succeed---Random-Forest">RANDOMFORESTREGRESSOR</a></li>
@@ -11900,7 +11900,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[146]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -11940,7 +11940,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[147]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">status</span><span class="p">,</span> <span class="n">housing_file_name</span> <span class="o">=</span> <span class="n">fetch_housing_data</span><span class="p">()</span>
@@ -11961,7 +11961,7 @@ div#notebook {
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>fetch_housing_data success = True
-file D:\Olson_Summer2017_PythonMachineLearing_bare\Housing\datasets\housing\housing.csv
+file D:\Olson_Summer2017_PythonMachineLearning\Housing\datasets\housing\housing.csv
 </pre>
 </div>
 </div>
@@ -12001,22 +12001,19 @@ file D:\Olson_Summer2017_PythonMachineLearing_bare\Housing\datasets\housing\hous
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;head&quot;</span> <span class="ow">and</span> <span class="s2">&quot;tail&quot;</span> <span class="n">are</span> <span class="n">inspired</span> <span class="n">by</span> <span class="n">commonly</span> <span class="n">used</span> <span class="n">Linux</span><span class="o">/</span><span class="n">Unix</span> <span class="n">programs</span> <span class="n">of</span> <span class="n">that</span> <span class="n">name</span> <span class="n">that</span> <span class="n">do</span> <span class="n">about</span> <span class="n">the</span> <span class="n">same</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">thing</span> <span class="k">with</span> <span class="nb">any</span> <span class="n">text</span> <span class="n">file</span><span class="o">.</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>"head" and "tail" are inspired by commonly used Linux/Unix programs of that name that do about the same type of thing with any text file.</p>
 
 </div>
 </div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[148]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -12037,7 +12034,7 @@ file D:\Olson_Summer2017_PythonMachineLearing_bare\Housing\datasets\housing\hous
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[148]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12175,7 +12172,7 @@ file D:\Olson_Summer2017_PythonMachineLearing_bare\Housing\datasets\housing\hous
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[149]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -12240,7 +12237,7 @@ memory usage: 1.6+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[150]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -12255,7 +12252,7 @@ memory usage: 1.6+ MB
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[150]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -12286,7 +12283,7 @@ Name: ocean_proximity, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[151]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
@@ -12301,7 +12298,7 @@ Name: ocean_proximity, dtype: int64</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[151]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12467,7 +12464,7 @@ Name: ocean_proximity, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[152]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -13286,7 +13283,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[153]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13313,7 +13310,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[154]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_set</span><span class="p">,</span> <span class="n">test_set</span> <span class="o">=</span> <span class="n">split_train_test</span><span class="p">(</span><span class="n">housing</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
@@ -13343,7 +13340,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##### Well, that almost worked... let&#39;s make a hash of it!</span>
@@ -13368,7 +13365,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[155]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">hashlib</span>
@@ -13410,7 +13407,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[156]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
@@ -13425,7 +13422,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[157]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_set</span><span class="p">),</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_set</span><span class="p">))</span>
@@ -13474,7 +13471,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[158]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">train_set</span><span class="p">[</span><span class="s2">&quot;median_income&quot;</span><span class="p">],</span><span class="mi">20</span><span class="p">)</span>
@@ -13489,7 +13486,7 @@ SZIkSZIGsogkSZIkSZKkgSwiSZIkSZIkaaD/H1pnesv/bV1XAAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[158]:</div>
+<div class="prompt output_prompt">Out[14]:</div>
 
 
 
@@ -13607,7 +13604,7 @@ JKljhoAkdcwQkKSOGQKS1DFDQJI6ZghIUscMAUnq2P8Df44AwSYvoGsAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">##### When good data goes bad - get the lumps out</span>
@@ -13638,7 +13635,7 @@ JKljhoAkdcwQkKSOGQKS1DFDQJI6ZghIUscMAUnq2P8Df44AwSYvoGsAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[159]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;income_cat&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;median_income&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1.5</span><span class="p">)</span>
@@ -13655,7 +13652,7 @@ JKljhoAkdcwQkKSOGQKS1DFDQJI6ZghIUscMAUnq2P8Df44AwSYvoGsAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[159]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -13798,7 +13795,7 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">StratifiedShuffleSplit</span>
@@ -13813,35 +13810,10 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-1-063085796809&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
-<span class="ansi-green-fg">      2</span> 
-<span class="ansi-green-fg">      3</span> split <span class="ansi-yellow-intense-fg ansi-bold">=</span> StratifiedShuffleSplit<span class="ansi-yellow-intense-fg ansi-bold">(</span>n_splits<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">1</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> test_size<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">0.2</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> random_state<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">47</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 4</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">for</span> train_index<span class="ansi-yellow-intense-fg ansi-bold">,</span> test_index <span class="ansi-green-intense-fg ansi-bold">in</span> split<span class="ansi-yellow-intense-fg ansi-bold">.</span>split<span class="ansi-yellow-intense-fg ansi-bold">(</span>housing<span class="ansi-yellow-intense-fg ansi-bold">,</span> housing<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-blue-intense-fg ansi-bold">&#34;income_cat&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">      5</span>     strat_train_set <span class="ansi-yellow-intense-fg ansi-bold">=</span> housing<span class="ansi-yellow-intense-fg ansi-bold">.</span>loc<span class="ansi-yellow-intense-fg ansi-bold">[</span>train_index<span class="ansi-yellow-intense-fg ansi-bold">]</span>
-<span class="ansi-green-fg">      6</span>     strat_test_set <span class="ansi-yellow-intense-fg ansi-bold">=</span> housing<span class="ansi-yellow-intense-fg ansi-bold">.</span>loc<span class="ansi-yellow-intense-fg ansi-bold">[</span>test_index<span class="ansi-yellow-intense-fg ansi-bold">]</span>
-
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;housing&#39; is not defined</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;income_cat&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">housing</span><span class="p">)</span>
@@ -13856,17 +13828,19 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 
 
 <div class="output_area">
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[18]:</div>
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-2-57fbbc8f0a17&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>housing<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-blue-intense-fg ansi-bold">&#34;income_cat&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>value_counts<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-yellow-intense-fg ansi-bold">/</span> len<span class="ansi-yellow-intense-fg ansi-bold">(</span>housing<span class="ansi-yellow-intense-fg ansi-bold">)</span>
 
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;housing&#39; is not defined</pre>
+
+<div class="output_text output_subarea output_execute_result">
+<pre>3.0    0.350581
+2.0    0.318847
+4.0    0.176308
+5.0    0.114438
+1.0    0.039826
+Name: income_cat, dtype: float64</pre>
 </div>
+
 </div>
 
 </div>
@@ -13895,7 +13869,7 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[162]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="nb">set</span> <span class="ow">in</span> <span class="p">(</span><span class="n">strat_train_set</span><span class="p">,</span> <span class="n">strat_test_set</span><span class="p">):</span>
@@ -13920,7 +13894,7 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="o">=</span><span class="n">strat_train_set</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -13956,7 +13930,7 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[164]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;population&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;jet&quot;</span><span class="p">),</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
@@ -13971,12 +13945,12 @@ eKZlz03A16rqm5OcLz8xLEkd6+FykCTpGgwBSeqYISBJHTMEJKljhoAkdcwQkKSOGQKS1DFDQJI6
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[164]:</div>
+<div class="prompt output_prompt">Out[21]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2f7461e07f0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2430b8415c0&gt;</pre>
 </div>
 
 </div>
@@ -16544,7 +16518,7 @@ IwpvIiIiIsuIwpuIiIjIMqLwJiIiIrKMKLyJiIiILCP/BznBoJ59eavEAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[165]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">housing</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
@@ -16560,7 +16534,7 @@ IwpvIiIiIsuIwpuIiIjIMqLwJiIiIrKMKLyJiIiILCP/BznBoJ59eavEAAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[165]:</div>
+<div class="prompt output_prompt">Out[22]:</div>
 
 
 
@@ -16605,7 +16579,7 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[167]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.tools.plotting</span> <span class="k">import</span> <span class="n">scatter_matrix</span>
@@ -16633,27 +16607,27 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[167]:</div>
+<div class="prompt output_prompt">Out[23]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F747E43D68&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F74678B4A8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F746794AC8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F747FC3A90&gt;],
-       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F748008CF8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F74805DD30&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F7458F4780&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F745557DA0&gt;],
-       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F74559F4A8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F73EABCBA8&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F74182D080&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F7417D4E80&gt;],
-       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F73EC22630&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F73EC4B470&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F745683668&gt;,
-        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002F741841128&gt;]], dtype=object)</pre>
+<pre>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B64C978&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430AF67D68&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B5CDE10&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430BF4E390&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B52D668&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B4C06A0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B47C710&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B444BE0&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430AE41780&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430BE2D5C0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B37EDA0&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B33B400&gt;],
+       [&lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B221CF8&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B1C9B00&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B67C630&gt;,
+        &lt;matplotlib.axes._subplots.AxesSubplot object at 0x000002430B09B828&gt;]], dtype=object)</pre>
 </div>
 
 </div>
@@ -20696,7 +20670,7 @@ FovFYqkiViG3WCwWi8VisViqiFXILRaLxWKxWCyWKvL/A6hpgxFW3H4eAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[169]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;median_income&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
@@ -20712,12 +20686,12 @@ FovFYqkiViG3WCwWi8VisViqiFXILRaLxWKxWCyWKvL/A6hpgxFW3H4eAAAAAElFTkSuQmCC
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[169]:</div>
+<div class="prompt output_prompt">Out[24]:</div>
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2f7452ae0b8&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x2430db67e10&gt;</pre>
 </div>
 
 </div>
@@ -22707,7 +22681,7 @@ kSJFihSkxiBFihQpUpAagxQpUqRIAfz/AuzfWQPEGyUAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[172]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;rooms_per_household&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">housing</span><span class="p">[</span><span class="s2">&quot;total_rooms&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">housing</span><span class="p">[</span><span class="s2">&quot;households&quot;</span><span class="p">]</span>
@@ -22726,7 +22700,7 @@ kSJFihSkxiBFihQpUpAagxQpUqRIAfz/AuzfWQPEGyUAAAAASUVORK5CYII=
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[172]:</div>
+<div class="prompt output_prompt">Out[25]:</div>
 
 
 
@@ -22807,7 +22781,7 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[187]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing</span> <span class="o">=</span> <span class="n">strat_train_set</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># drop labels for training set</span>
@@ -22842,7 +22816,7 @@ Name: median_house_value, dtype: float64</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[187]:</div>
+<div class="prompt output_prompt">Out[26]:</div>
 
 
 
@@ -22882,7 +22856,7 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[189]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
@@ -22920,7 +22894,7 @@ Name: median_house_value, dtype: float64</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[189]:</div>
+<div class="prompt output_prompt">Out[27]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -23039,7 +23013,7 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[194]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">Pipeline</span>
@@ -23091,7 +23065,7 @@ Name: median_house_value, dtype: float64</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[194]:</div>
+<div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -23127,7 +23101,7 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[195]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LinearRegression</span>
@@ -23147,7 +23121,7 @@ Name: median_house_value, dtype: float64</pre>
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[195]:</div>
+<div class="prompt output_prompt">Out[29]:</div>
 
 
 
@@ -23163,7 +23137,7 @@ Name: median_house_value, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[197]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># let&#39;s try the full pipeline on a few training instances and compare against the actual values</span>
@@ -23219,7 +23193,7 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[198]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span>
@@ -23239,7 +23213,7 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[198]:</div>
+<div class="prompt output_prompt">Out[31]:</div>
 
 
 
@@ -23294,7 +23268,7 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[199]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">DecisionTreeRegressor</span>
@@ -23316,7 +23290,7 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[199]:</div>
+<div class="prompt output_prompt">Out[32]:</div>
 
 
 
@@ -23355,7 +23329,7 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[205]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
@@ -23393,11 +23367,11 @@ Labels: [194000.0, 116100.0, 129200.0, 310000.0, 332700.0]
   70026.4647017   69130.95569754]
 DecisionTreeRegressor Mean: 69763.3546174
 DecisionTreeRegressor Standard deviation: 2521.26099566
-lin_reg Scores: [ 65700.48321892  68762.92305362  69337.29782428  69358.56833171
+LinearRegression Scores: [ 65700.48321892  68762.92305362  69337.29782428  69358.56833171
   67239.42084393  69419.71541978  70844.1689622   68361.57614763
   67030.87537834  68330.63853462]
-lin_reg Mean: 68438.5667715
-lin_reg Standard deviation: 1394.38608567
+LinearRegression Mean: 68438.5667715
+LinearRegression Standard deviation: 1394.38608567
 </pre>
 </div>
 </div>
@@ -23429,7 +23403,7 @@ lin_reg Standard deviation: 1394.38608567
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[211]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestRegressor</span>
