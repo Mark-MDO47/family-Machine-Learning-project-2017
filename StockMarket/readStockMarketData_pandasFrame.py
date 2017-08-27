@@ -213,9 +213,9 @@ def convert_string_to_np(theString, thisYear=None):
         else:
             if MDO_DEBUG:
                 sys.stdout.write("ERROR:   UNKNOWN FORMAT (date2) OF DATA: |%s|" % myString)
-            for spl in dateStringSplit:
-                sys.stdout.write(" split=|%s|" % spl)
-            sys.stdout.write(" no more splits\n")
+                for spl in dateStringSplit:
+                    sys.stdout.write(" split=|%s|" % spl)
+                sys.stdout.write(" no more splits\n")
             result = np.inf
             if date_type == 'RelDate':
                 result_meta = META_DATE2_REL_FAIL
@@ -410,7 +410,7 @@ def walk_path(path, categories=[]):
                 cat_data, cat_meta, cat_extra = mdoconvertHtmlData(fname=full_file_path, categories=categories)
                 if MDO_META:
                    output_lin(ticker, data = list(zip(cat_data, cat_meta)), extra = [cat_extra])
-                else:
+               else:
                    output_lin(ticker, data = list(cat_data), extra = [cat_extra])
         if MDO_DEBUG:
             break           
