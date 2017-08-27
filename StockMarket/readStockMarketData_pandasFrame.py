@@ -6,23 +6,37 @@ import sys
 # import time
 from datetime import datetime
 
-MDO_DEBUG = False
+"""
+readStockMarketData_pandasFrame.py
+Author: Mark Olson - heavily based on simpler code from https://pythonprogramming.net/getting-data-machine-learning/?completed=/data-acquisition-machine-learning/
+   We want to extract more fields from the data than that original code extracted
 
-path = r'.\TestData\intraQuarter'
+This routine reads html files from Yahoo Finance to gather information about individual stocks
+The information is written to stdout in the format of a *.csv file
 
-categories = [
-   'Report Date', 'Market Cap', 'Enterprise Value', 'Trailing P/E', 'Forward P/E', 'PEG Ratio',
-   'Price/Sales', 'Price/Book', 'Enterprise Value/Revenue', 'Enterprise Value/EBITDA', 'Fiscal Year Ends',
-   'Most Recent Quarter', 'Profit Margin', 'Operating Margin', 'Return on Assets', 'Return on Equity',
-   'Revenue', 'Revenue Per Share', 'Revenue Growth', 'Qtrly Revenue Growth', 'Gross Profit', 'EBITDA', 'Net Income Avl to Common',
-   'Diluted EPS', 'Qtrly Earnings Growth', 'Total Cash', 'Total Cash Per Share', 'From Operations', 'Free Cashflow', 'Total Debt', 'Total Debt/Equity',
-   'Current Ratio', 'Book Value Per Share', 'Operating Cash Flow', 'Levered Free Cash Flow', 'Beta', '52-Week Change',
-   'S&P500 52-Week Change', '52-Week High', '52-Week Low', '50-Day Moving Average', '200-Day Moving Average',
-   'Average Volume', 'Shares Outstanding', 'Float', '% Held by Insiders', '% Held by Institutions', 'Shares Short',
-   'Short Ratio', 'Short % of Float', 'Shares Short (prior month)', 'Forward Annual Dividend Rate', 'Forward Annual Dividend Yield',
-   'Trailing Annual Dividend Rate', 'Trailing Annual Dividend Yield', '5 Year Average Dividend Yield', 'Payout Ratio',
-   '52-Week Change (relative to S&P500)', 'Average Volume (3 month)', 'Average Volume (10 day)', 'Annual Dividend', 'Dividend Yield',
-   'Dividend Date', 'Ex-Dividend Date', 'Last Split Factor', 'Last Split Date']
+The *.html files are stored in a path found in the global DATA_DIRECTORY
+    For this exercise we will walk the data found in the _KeyStats subdirectory
+The data types that we will collect are found in the global DATA_CATEGORIES
+"""
+
+MDO_DEBUG = False # put debug statements inline with data
+MDO_META = True # put detailed meta-cell giving status adjacent to data cells
+
+DATA_DIRECTORY = r'.\TestData\intraQuarter'
+
+DATA_CATEGORIES = [
+    'Report Date', 'Market Cap', 'Enterprise Value', 'Trailing P/E', 'Forward P/E', 'PEG Ratio',
+    'Price/Sales', 'Price/Book', 'Enterprise Value/Revenue', 'Enterprise Value/EBITDA', 'Fiscal Year Ends',
+    'Most Recent Quarter', 'Profit Margin', 'Operating Margin', 'Return on Assets', 'Return on Equity',
+    'Revenue', 'Revenue Per Share', 'Revenue Growth', 'Qtrly Revenue Growth', 'Gross Profit', 'EBITDA', 'Net Income Avl to Common',
+    'Diluted EPS', 'Qtrly Earnings Growth', 'Total Cash', 'Total Cash Per Share', 'From Operations', 'Free Cashflow', 'Total Debt', 'Total Debt/Equity',
+    'Current Ratio', 'Book Value Per Share', 'Operating Cash Flow', 'Levered Free Cash Flow', 'Beta', '52-Week Change',
+    'S&P500 52-Week Change', '52-Week High', '52-Week Low', '50-Day Moving Average', '200-Day Moving Average',
+    'Average Volume', 'Shares Outstanding', 'Float', '% Held by Insiders', '% Held by Institutions', 'Shares Short',
+    'Short Ratio', 'Short % of Float', 'Shares Short (prior month)', 'Forward Annual Dividend Rate', 'Forward Annual Dividend Yield',
+    'Trailing Annual Dividend Rate', 'Trailing Annual Dividend Yield', '5 Year Average Dividend Yield', 'Payout Ratio',
+    '52-Week Change (relative to S&P500)', 'Average Volume (3 month)', 'Average Volume (10 day)', 'Annual Dividend', 'Dividend Yield',
+    'Dividend Date', 'Ex-Dividend Date', 'Last Split Factor', 'Last Split Date']
 
 META_BUG_UNKNOWN = 'BUG_convert_string_to_np'
 META_DATE_FNAME_SUCCESS = 'DATE_FNAME_SUCCESS'
@@ -86,19 +100,36 @@ ticker_symbols = [
 
 
 
-"""
-   returns np.nan if N/A or NaN found
-   multiplies by appropriate number for B, M, K, or %
-   for : we compute a fraction (such as split factor 2:1 --> 2.0
-   for date containing year ('31-Dec-05') returns floating point as per Excel date/time format
-   for date not containing year ('24-Sep'; example Fiscal Year Ends); returns same Excel date/time format using input thisYear
-   if we cannot figure it out we return np.inf
-"""
 string_to_np_lastChar = {'B': 1000000000.0, 'M': 1000000.0, 'K': 1000.0, '%': 0.01}
 string_to_np_NaN = {'NAN': np.nan, 'NAN%': np.nan, 'N/A': np.nan}
 string_to_month = {'JAN': '01', 'FEB': '02', 'MAR': '03', 'APR': '04', 'MAY': '05', 'JUN': '06', 'JUL': '07', 'AUG': '08', 'SEP': '09', 'OCT': '10', 'NOV': '11', 'DEC': '12'}
 dtVal_epoch_excel = datetime.strptime('1900-01-01', '%Y-%m-%d')
 def convert_string_to_np(theString, thisYear=None):
+    """
+    function: convert_string_to_np(theString, thisYear)
+    Author: Mark Olson
+    This routine converts the parameter theString and returns an np.something and a meta describing how the conversion went
+
+    input parameters:
+        theString - string to be converted
+        thisYear - integer 4-digit year number such as 2017
+    returns: return result, result_meta
+        result - np.something with result of conversion
+            returns np.nan if N/A or NaN found
+            multiplies by appropriate number for B, M, K, or % (1.3 B is 1.3E9)
+            for : we compute a fraction (such as split factor 2:1 --> 2.0
+            for date containing year ('31-Dec-05') returns floating point as per Excel date/time format
+            for date not containing year ('24-Sep'; example Fiscal Year Ends); returns same Excel date/time format using parameter thisYear
+            if we cannot figure it out we return np.inf
+        result_meta - detailed meta string describing how the conversion went
+    GLOBAL flags:
+        MDO_DEBUG - True if want debug information sent to stdout immediately regarding the conversion
+
+    This routine does not "know" this, but theString comes from one of the DATA_CATEGORIES fields in an html file
+        thus the formatting of the fields is quite variable
+    The detailed meta information and the MDO_DEBUG information can be quite useful when somebody decides to enter
+        a field in a unique way, or has a typo, etc.
+    """
     result = np.nan
     result_meta = META_BUG_UNKNOWN # UNKNOWN - bug in routine if returned
     myStringSplit = []
@@ -221,19 +252,32 @@ def convert_string_to_np(theString, thisYear=None):
             result = np.inf
             result_meta = META_NUMERIC_SIMPLE_FAIL
     return result, result_meta
+    ### end of convert_string_to_np(theString, thisYear=None):
 
 def insert_meta(cat_meta, meta_key):
+    """
+    function insert_meta - utility to put the detailed meta data into the correct position in the meta summary
+    """
     if meta_key in cat_meta.keys():
         cat_meta[meta_key] += 1
     else:
         cat_meta[meta_key] = 1
     return cat_meta
 
-"""
-   return_data[] matches categories
-   returns np.inf if not found, np.nan if N/A or NaN found
-"""
 def mdoconvertHtmlData(fname="stdio", categories=[]):
+    """
+    function: mdoconvertHtmlData(fname="stdio", categories=[]):
+    Author: Mark Olson
+    This routine reads an html file searching for data in the categories
+
+    input parameters:
+    returns: return return_data, return_meta, meta_sum_str
+    return_data[] matches categories in order
+        returns np.inf if not found, np.nan if N/A or NaN found
+    return_meta[] matches categories in order
+        detailed meta string for each conversion
+    meta_sum_str - string with summary of conversion
+    """
     return_data = np.empty((len(categories)))
     return_data[:] = np.inf
     return_meta = ["NOT_FOUND" for x in range(len(categories))]
@@ -305,16 +349,23 @@ def mdoconvertHtmlData(fname="stdio", categories=[]):
         meta_sum_str = "%s%s=%d;" % (meta_sum_str, meta_key, meta_summary[meta_key])
     return return_data, return_meta, meta_sum_str
 
-def output_hdr(tkr, categories=[], extra_categories=[]):
+def output_hdr(tkr, categories=[], extra_categories=[], write_meta_columns = True):
+    """
+    function output_hdr - utility to put csv-style header to stdout
+    """
     sys.stdout.write("%s\t" % tkr)
     for idx in range(len(categories)):
         sys.stdout.write("%s\t" % categories[idx])
-        sys.stdout.write("META %s\t" % categories[idx])
+        if write_meta_columns:
+           sys.stdout.write("META %s\t" % categories[idx])
     for idx in range(len(extra_categories)):
         sys.stdout.write("%s\t" % extra_categories[idx])
     sys.stdout.write("\n")
 
 def output_lin(tkr, data=[], extra=[]):
+    """
+    function output_lin - utility to put csv-style line to stdout - tab is separator
+    """
     sys.stdout.write("%s\t" % tkr)
     for idx in range(len(data)):
         sys.stdout.write("%s\t" % data[idx][0])
@@ -324,10 +375,25 @@ def output_lin(tkr, data=[], extra=[]):
     sys.stdout.write("\n")
 
 def walk_path(path, categories=[]):
+    """
+    function walk_path(path, categories)
+    Author: Mark Olson
+    This routine goes through the _KeyStats directory reading the html files
+    It writes a line to stdout for each file found with data for each category
+
+    input parameters:
+        path - string with path (relative or absolute) to the data.
+            subdirectories in this path would be _AnnualEarnings, _KeyStats, _QuarterlyEarnings
+        categories[] - the categories of data to be extracted from the html files
+            this is in the format of a list of strings
+    returns:
+        does not return a value
+        outputs are written to stdout: a file in CSV tab-separated format
+    """
     statspath = path+'\\_KeyStats'
     stock_list = [x[0] for x in os.walk(statspath)]
 
-    output_hdr("Ticker", categories=categories, extra_categories=["MetaData"])
+    output_hdr("Ticker", categories=categories, extra_categories=["MetaData"], write_meta_columns = MDO_META)
     for each_dir in stock_list[1:]:
         if MDO_DEBUG:
             each_dir = 'C:\\Users\\mdo\\Documents\\TestData\\intraQuarter\\_KeyStats\\kmx' # DEBUG
@@ -342,8 +408,11 @@ def walk_path(path, categories=[]):
                 full_file_path = each_dir+'\\'+file
                 # print("   %s" % full_file_path)
                 cat_data, cat_meta, cat_extra = mdoconvertHtmlData(fname=full_file_path, categories=categories)
-                output_lin(ticker, data = list(zip(cat_data, cat_meta)), extra = [cat_extra])
+                if MDO_META:
+                   output_lin(ticker, data = list(zip(cat_data, cat_meta)), extra = [cat_extra])
+                else:
+                   output_lin(ticker, data = list(cat_data), extra = [cat_extra])
         if MDO_DEBUG:
             break           
                     
-walk_path(path=path, categories=categories)
+walk_path(path=DATA_DIRECTORY, categories=DATA_CATEGORIES)
