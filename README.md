@@ -1,6 +1,10 @@
 # family-Machine-Learning-project-2017
 We are doing a two-part Machine Learning project this summer
 
+![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/DeepLearning.png "Deep Learning")
+![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/HandsOnMachineLearingWithScikitLearnAndTensorflow.png "Hands-On Machine Learing With Scikit Learn And ")
+![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/PythonMachineLearning.png "Python Machine Learning")
+
 Python is the computer language we will use. Python is a very modern and active language right now.
 Note to family: I think Python is installed on all of your computers using a software management tool called Anaconda.
 
@@ -23,11 +27,3 @@ Some great resources:
 ### Wikipedia.org
 
 ### The inimitable www.google.com
-
-The Jupyter Notebooks as html files:
-
-<B>NOTE: these HTML versions look MUCH better if you copy them to your disk and display in your web browser, especially the math formatting.
-The plots look OK this way.<B>
-
-<a href="http://htmlpreview.github.io/?https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Regression/MarkLinearRegression.html">Mark's Regression Tutorial</a>
-
