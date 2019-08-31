@@ -1,4 +1,4 @@
-Goldilocks and the three HyperParameters!
+Goldilocks and the three Models!
 
 Underfit: 
 ![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Regression/Underfit.png "Underfit: This model doesn't have enough complexity!")
