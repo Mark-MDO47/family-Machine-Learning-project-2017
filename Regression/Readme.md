@@ -10,7 +10,7 @@ Overfit: This model has too much complexity!
 
 Just Right Fit: This model has just the right amount of complexity!
 
-![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Regression/Just Right Fit.png "JustRightFit: This model has just the right amount of complexity!")
+![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Regression/JustRightFit.png "Just Right Fit: This model has just the right amount of complexity!")
 
 For best viewing without cloning a local copy, go to this URL
 
