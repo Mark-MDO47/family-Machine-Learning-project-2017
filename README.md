@@ -34,7 +34,7 @@ Some great resources:
 - **"Python Machine Learning"** by S. Raschke
 - **"Deep Learning"** by I. Goodfellow, Y. Bengio, and A. Courville
 - **Anaconda** - https://www.continuum.io/
-- **Wikipedia.org**
-- The inimitable **www.google.com**
+- **Wikipedia.org** - https://www.wikipedia.org/
+- The inimitable **www.google.com** - https://www.google.com/
 
 Note: this was obviously done prior to the advent of the arrival of many competent LLMs.
