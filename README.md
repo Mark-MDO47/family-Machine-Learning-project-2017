@@ -2,6 +2,13 @@
 We are doing a two-part Machine Learning project this summer of 2017
 
 **Table Of Contents**
+* [Top](#family\-machine\-learning\-project\-2017 "Top")
+* [Books Used (pix)](#books-used-(pix) "Books Used (pix)")
+* [Computer Tools Used](#computer-tools-used "Computer Tools Used")
+  * [Python](#python "Python")
+  * [GIT](#git "GIT")
+  * [AI/ML Libraries](#aiml-libraries "AI/ML Libraries")
+* [Resources](#resources "Resources")
 
 ## Books Used (pix)
 ![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/DeepLearning.png "Deep Learning")
