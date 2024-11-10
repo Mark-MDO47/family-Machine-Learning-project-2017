@@ -10,6 +10,11 @@ We are doing a two-part Machine Learning project this summer of 2017
   * [AI/ML Libraries](#aiml-libraries "AI/ML Libraries")
 * [Resources](#resources "Resources")
 
+## Intro and Getting Started with the Tools
+
+This PDF tells how to get started with the tools.<br>
+https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/Family_Summer2017_PythonMachineLearning.pdf
+
 ## Books Used (pix)
 ![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/DeepLearning.png "Deep Learning")
 ![alt text](https://github.com/Mark-MDO47/family-Machine-Learning-project-2017/blob/master/HandsOnMachineLearingWithScikitLearnAndTensorflow.png "Hands-On Machine Learing With Scikit Learn And ")
