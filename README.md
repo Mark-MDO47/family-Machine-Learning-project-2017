@@ -3,6 +3,7 @@ We are doing a two-part Machine Learning project this summer of 2017
 
 **Table Of Contents**
 * [Top](#family\-machine\-learning\-project\-2017 "Top")
+* [Intro and Getting Started with the Tools](#intro-and-getting-started-with-the-tools "Intro and Getting Started with the Tools")
 * [Books Used (pix)](#books-used-(pix) "Books Used (pix)")
 * [Computer Tools Used](#computer-tools-used "Computer Tools Used")
   * [Python](#python "Python")
